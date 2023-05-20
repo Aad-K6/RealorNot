@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Image Classifier</title>
+    <style>
+      html, body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        background: linear-gradient(90deg, #1e3c72, #2a5298);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      h1 {
+        font-size: 4em;
+        color: #fff;
+        text-align: center;
+        margin-top: 10px;
+        font-family: Times;
+      }
+      input[type="file"] {
+        display: none;
+      }
+      .upload-btn {
+        background-color: #fff;
+        color: #1e3c72;
+        font-size: 1.5em;
+        font-weight: bold;
+        padding: 20px;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        margin: 0 auto;
+        display: block;
+        width: 200px;
+        text-align: center;
+      }
+      .upload-btn:hover {
+        background-color: #1e3c72;
+        color: #fff;
+      }
+      .classify-btn {
+        background-color: #1e3c72;
+        color: #fff;
+        font-size: 1.5em;
+        font-weight: bold;
+        padding: 20px;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        margin-top: 30px;
+        display: block;
+        width: 200px;
+        text-align: center;
+        margin: 0 auto;
+      }
+      .classify-btn:hover {
+        background-color: #2a5298;
+      }
+      .container {
+        border: 2px solid #fff;
+        padding: 40px;
+        max-width: 500px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Image Classifier</h1>
+      <form action="/predict" method="post" enctype="multipart/form-data">
+        <label for="file-upload" class="upload-btn">Upload Image</label>
+        <input type="file" name="image" id="file-upload" accept="image/*">
+        <br><br>
+        <input type="submit" value="Classify" class="classify-btn">
+      </form>
+      <div id="image-preview"></div>
+      <script>
+        function previewImage(event) {
+          var reader = new FileReader();
+          reader.onload = function() {
+            var output = document.getElementById('image-preview');
+            output.innerHTML = '<img src="' + reader.result + '" style="max-width: 100%">';
+          }
+          reader.readAsDataURL(event.target.files[0]);
+        }
+        var fileUpload = document.getElementById('file-upload');
+      </script>
+    </div>
+  </body>
+</html>
